@@ -5,17 +5,17 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema interclasse
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema interclasse
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `interclasse` DEFAULT CHARACTER SET utf8 ;
 USE `interclasse` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`tbl_modalidade`
+-- Table `interclasse`.`tbl_modalidade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_modalidade` (
   `id_modalidade` INT NOT NULL,
@@ -25,7 +25,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`tbl_times`
+-- Table `interclasse`.`tbl_times`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_times` (
   `idl_times` INT NOT NULL AUTO_INCREMENT,
@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_times` (
   INDEX `fk_tbl_times_tbl_modalidade1_idx` (`tbl_modalidade_id_modalidade` ASC) VISIBLE,
   CONSTRAINT `fk_tbl_times_tbl_modalidade1`
     FOREIGN KEY (`tbl_modalidade_id_modalidade`)
-    REFERENCES `mydb`.`tbl_modalidade` (`id_modalidade`)
+    REFERENCES `interclasse`.`tbl_modalidade` (`id_modalidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`tbl_jogadores`
+-- Table `interclasse`.`tbl_jogadores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores` (
   `id_jogadores` INT NOT NULL AUTO_INCREMENT,
@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`boletim`
+-- Table `interclasse`.`boletim`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`boletim` (
   `id_boletim` INT NOT NULL AUTO_INCREMENT,
