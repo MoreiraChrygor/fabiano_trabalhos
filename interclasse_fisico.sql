@@ -44,17 +44,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `interclasse`.`tbl_jogadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores` (
+CREATE TABLE IF NOT EXISTS `mydb`.`tbl_jogadores` (
   `id_jogadores` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  `tbl_times_idl_times` INT NOT NULL,
-  PRIMARY KEY (`id_jogadores`),
-  INDEX `fk_tbl_jogadores_tbl_times1_idx` (`tbl_times_idl_times` ASC) VISIBLE,
-  CONSTRAINT `fk_tbl_jogadores_tbl_times1`
-    FOREIGN KEY (`tbl_times_idl_times`)
-    REFERENCES `interclasse`.`tbl_times` (`idl_times`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_jogadores`))
 ENGINE = InnoDB;
 
 
@@ -72,6 +65,28 @@ CREATE TABLE IF NOT EXISTS `interclasse`.`boletim` (
   CONSTRAINT `fk_boletim_tbl_jogadores1`
     FOREIGN KEY (`tbl_jogadores_id_jogadores`)
     REFERENCES `interclasse`.`tbl_jogadores` (`id_jogadores`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `interclasse`.`tbl_jogadores_has_tbl_times`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores_has_tbl_times` (
+  `tbl_jogadores_id_jogadores` INT NOT NULL,
+  `tbl_times_idl_times` INT NOT NULL,
+  PRIMARY KEY (`tbl_jogadores_id_jogadores`, `tbl_times_idl_times`),
+  INDEX `fk_tbl_jogadores_has_tbl_times_tbl_times1_idx` (`tbl_times_idl_times` ASC) VISIBLE,
+  INDEX `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1_idx` (`tbl_jogadores_id_jogadores` ASC) VISIBLE,
+  CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1`
+    FOREIGN KEY (`tbl_jogadores_id_jogadores`)
+    REFERENCES `mydb`.`tbl_jogadores` (`id_jogadores`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_times1`
+    FOREIGN KEY (`tbl_times_idl_times`)
+    REFERENCES `interclasse`.`tbl_times` (`idl_times`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
