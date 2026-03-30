@@ -44,7 +44,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `interclasse`.`tbl_jogadores`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tbl_jogadores` (
+CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores` (
   `id_jogadores` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_jogadores`))
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores_has_tbl_times` (
   INDEX `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1_idx` (`tbl_jogadores_id_jogadores` ASC) VISIBLE,
   CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1`
     FOREIGN KEY (`tbl_jogadores_id_jogadores`)
-    REFERENCES `mydb`.`tbl_jogadores` (`id_jogadores`)
+    REFERENCES `interclasse`.`tbl_jogadores` (`id_jogadores`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_times1`
