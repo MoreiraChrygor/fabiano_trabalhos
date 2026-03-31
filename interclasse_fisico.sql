@@ -18,7 +18,7 @@ USE `interclasse` ;
 -- Table `interclasse`.`tbl_modalidade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_modalidade` (
-  `id_modalidade` INT NOT NULL,
+  `id_modalidade` INT NOT NULL AUTO_INCREMENT,
   `modalidade` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id_modalidade`))
 ENGINE = InnoDB;
@@ -28,15 +28,15 @@ ENGINE = InnoDB;
 -- Table `interclasse`.`tbl_times`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_times` (
-  `idl_times` INT NOT NULL AUTO_INCREMENT,
+  `id_times` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `tbl_modalidade_id_modalidade` INT NOT NULL,
-  PRIMARY KEY (`idl_times`),
+  PRIMARY KEY (`id_times`),
   INDEX `fk_tbl_times_tbl_modalidade1_idx` (`tbl_modalidade_id_modalidade` ASC) VISIBLE,
   CONSTRAINT `fk_tbl_times_tbl_modalidade1`
     FOREIGN KEY (`tbl_modalidade_id_modalidade`)
     REFERENCES `interclasse`.`tbl_modalidade` (`id_modalidade`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `interclasse`.`boletim` (
   CONSTRAINT `fk_boletim_tbl_jogadores1`
     FOREIGN KEY (`tbl_jogadores_id_jogadores`)
     REFERENCES `interclasse`.`tbl_jogadores` (`id_jogadores`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -75,19 +75,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `interclasse`.`tbl_jogadores_has_tbl_times` (
   `tbl_jogadores_id_jogadores` INT NOT NULL,
-  `tbl_times_idl_times` INT NOT NULL,
-  PRIMARY KEY (`tbl_jogadores_id_jogadores`, `tbl_times_idl_times`),
-  INDEX `fk_tbl_jogadores_has_tbl_times_tbl_times1_idx` (`tbl_times_idl_times` ASC) VISIBLE,
+  `tbl_times_id_times` INT NOT NULL,
+  PRIMARY KEY (`tbl_jogadores_id_jogadores`, `tbl_times_id_times`),
+  INDEX `fk_tbl_jogadores_has_tbl_times_tbl_times1_idx` (`tbl_times_id_times` ASC) VISIBLE,
   INDEX `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1_idx` (`tbl_jogadores_id_jogadores` ASC) VISIBLE,
   CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_jogadores1`
     FOREIGN KEY (`tbl_jogadores_id_jogadores`)
     REFERENCES `interclasse`.`tbl_jogadores` (`id_jogadores`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_jogadores_has_tbl_times_tbl_times1`
-    FOREIGN KEY (`tbl_times_idl_times`)
-    REFERENCES `interclasse`.`tbl_times` (`idl_times`)
-    ON DELETE NO ACTION
+    FOREIGN KEY (`tbl_times_id_times`)
+    REFERENCES `interclasse`.`tbl_times` (`id_times`)
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -120,7 +120,7 @@ INSERT INTO tbl_jogadores (nome) VALUES
 ('Beatriz Lima'),
 ('Carlos Pereira');
 
-INSERT INTO tbl_jogadores_has_tbl_times (tbl_jogadores_id_jogadores, tbl_times_idl_times) VALUES
+INSERT INTO tbl_jogadores_has_tbl_times (tbl_jogadores_id_jogadores, tbl_times_id_times) VALUES
 (1, 1),
 (2, 1),
 (3, 2),
@@ -152,7 +152,7 @@ FROM tbl_jogadores j
 JOIN tbl_jogadores_has_tbl_times jt 
     ON j.id_jogadores = jt.tbl_jogadores_id_jogadores
 JOIN tbl_times t 
-    ON t.idl_times = jt.tbl_times_idl_times
+    ON t.id_times = jt.tbl_times_id_times
 JOIN tbl_modalidade m 
     ON m.id_modalidade = t.tbl_modalidade_id_modalidade
 LEFT JOIN boletim b 
