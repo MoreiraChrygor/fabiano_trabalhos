@@ -98,11 +98,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- inserts
 
-INSERT INTO tbl_modalidade (id_modalidade, modalidade) VALUES
-(1, 'Futebol'),
-(2, 'Voleibol'),
-(3, 'Basquete'),
-(4, 'Handebol');
+INSERT INTO tbl_modalidade (modalidade) VALUES
+('Futebol'),
+('Voleibol'),
+('Basquete'),
+('Handebol');
 
 INSERT INTO tbl_times (nome, tbl_modalidade_id_modalidade) VALUES
 ('1A Futebol', 1),
@@ -111,6 +111,7 @@ INSERT INTO tbl_times (nome, tbl_modalidade_id_modalidade) VALUES
 ('2C Basquete', 3),
 ('3A Handebol', 4);
 
+
 INSERT INTO tbl_jogadores (nome) VALUES
 ('João Silva'),
 ('Pedro Santos'),
@@ -118,18 +119,22 @@ INSERT INTO tbl_jogadores (nome) VALUES
 ('Marcos Souza'),
 ('Ana Costa'),
 ('Beatriz Lima'),
-('Carlos Pereira');
+('Carlos Pereira'),
+('Fernanda Rocha'),
+('Gabriel Alves');
 
 INSERT INTO tbl_jogadores_has_tbl_times (tbl_jogadores_id_jogadores, tbl_times_id_times) VALUES
-(1, 1),
-(2, 1),
-(3, 2),
-(4, 3),
-(5, 4),
-(6, 5),
-(7, 2),
-(1, 2), -- jogador em mais de um time
-(3, 1);
+(1,1),
+(2,1),
+(3,2),
+(4,3),
+(5,4),
+(6,5),
+(7,2),
+(8,3),
+(9,4),
+(1,2), -- jogador em mais de um time
+(3,1);
 
 INSERT INTO boletim (frequencia, mencao, ocorrencia, tbl_jogadores_id_jogadores) VALUES
 (95, 9, 4, 1),
@@ -138,7 +143,9 @@ INSERT INTO boletim (frequencia, mencao, ocorrencia, tbl_jogadores_id_jogadores)
 (60, 6, 3, 4),
 (98, 10, 1, 5),
 (85, 8, 3, 6),
-(70, 7, 2, 7);
+(70, 7, 2, 7),
+(92, 9, 1, 8),
+(80, 7, 2, 9);
 
 -- select comfirmação com inner join e left
 
@@ -170,3 +177,5 @@ SELECT * FROM interclasse.tbl_jogadores_has_tbl_times;
 SELECT * FROM interclasse.tbl_modalidade;
 
 SELECT * FROM interclasse.tbl_times;
+
+
