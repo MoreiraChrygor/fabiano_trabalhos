@@ -179,3 +179,22 @@ SELECT * FROM interclasse.tbl_modalidade;
 SELECT * FROM interclasse.tbl_times;
 
 
+-- Quantos jogadores estão em mais de uma modalidade?
+SELECT 
+    j.nome AS jogador,
+    COUNT(DISTINCT m.id_modalidade) AS quantidade_modalidades
+FROM tbl_jogadores j
+JOIN tbl_jogadores_has_tbl_times jt 
+    ON j.id_jogadores = jt.tbl_jogadores_id_jogadores
+JOIN tbl_times t 
+    ON t.id_times = jt.tbl_times_id_times
+JOIN tbl_modalidade m 
+    ON m.id_modalidade = t.tbl_modalidade_id_modalidade
+GROUP BY j.id_jogadores, j.nome
+HAVING COUNT(DISTINCT m.id_modalidade) > 1;
+
+
+SELECT COUNT(DISTINCT m.id_modalidade) AS total_modalidades_com_times
+FROM tbl_modalidade m
+JOIN tbl_times t 
+    ON m.id_modalidade = t.tbl_modalidade_id_modalidade;
