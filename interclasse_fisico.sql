@@ -134,7 +134,7 @@ INSERT INTO tbl_jogadores_has_tbl_times (tbl_jogadores_id_jogadores, tbl_times_i
 (8,3),
 (9,4),
 (1,2), -- jogador em mais de um time
-(3,1);
+(1,3);
 
 INSERT INTO boletim (frequencia, mencao, ocorrencia, tbl_jogadores_id_jogadores) VALUES
 (95, 9, 4, 1),
